@@ -1,17 +1,20 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import 'agenda.dart';
 
 class Tabs extends StatefulWidget {
-  Tabs({Key? key});
+  Tabs({Key? key, required this.appointmentDetails});
+
+  final List<Appointment> appointmentDetails;
 
   @override
   _Kontroller createState() => _Kontroller();
 }
 
-class _Kontroller extends State<Tabs>
-    with SingleTickerProviderStateMixin {
+class _Kontroller extends State<Tabs> with SingleTickerProviderStateMixin {
   late TabController tabController;
 
   @override
@@ -26,8 +29,6 @@ class _Kontroller extends State<Tabs>
     tabController.dispose();
   }
 
-  List<Appointment> appointmentDetails = <Appointment>[];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +40,8 @@ class _Kontroller extends State<Tabs>
             padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
             child: Container(
               decoration: BoxDecoration(
-                  color: Colors.grey.shade700, borderRadius: BorderRadius.circular(7)),
+                  color: Colors.grey.shade700,
+                  borderRadius: BorderRadius.circular(7)),
               height: 33,
               child: Center(
                 child: Padding(
@@ -82,7 +84,7 @@ class _Kontroller extends State<Tabs>
               controller: tabController,
               children: [
                 //Tab1
-                CustomAgenda(appointmentDetails: appointmentDetails),
+                CustomAgenda(appointmentDetails: widget.appointmentDetails),
                 //Tab2
                 Container(),
                 //Tab3
