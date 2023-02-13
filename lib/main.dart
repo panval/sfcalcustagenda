@@ -1,8 +1,10 @@
-import 'package:custagencal/tabs.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'calendar_data.dart';
 
+import 'calendar_data.dart';
+import 'tabs.dart';
 
 void main() => runApp(AgendaViewCustomization());
 
@@ -26,7 +28,7 @@ class ScheduleExample extends State<CustomAgenda> {
 
   @override
   Widget build(BuildContext context) {
-    return (Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: Column(
           children: <Widget>[
@@ -35,24 +37,30 @@ class ScheduleExample extends State<CustomAgenda> {
                 initialDisplayDate: DateTime.now(),
                 view: CalendarView.month,
                 dataSource: getCalendarDataSource(),
-                onTap: calendarTapped,
+                onTap: (v) {
+                  calendarTapped(v);
+
+                  setState(() {});
+                },
                 initialSelectedDate: DateTime.now(),
               ),
             ),
             Expanded(
-              child: Tabs(),
+              child: Tabs(appointmentDetails: appointmentDetails),
             ),
           ],
         ),
       ),
-    ));
+    );
   }
 
+//todo:  missing initial event showUp.
   void calendarTapped(CalendarTapDetails calendarTapDetails) {
     if (calendarTapDetails.targetElement == CalendarElement.calendarCell) {
+      final result = calendarTapDetails.appointments!.cast<Appointment>();
+
       setState(() {
-        appointmentDetails =
-            calendarTapDetails.appointments!.cast<Appointment>();
+        appointmentDetails = result;
       });
     }
   }

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class CustomAgenda extends StatelessWidget {
-  CustomAgenda({Key? key, required this.appointmentDetails}) : super(key: key);
+  const CustomAgenda({Key? key, required this.appointmentDetails})
+      : super(key: key);
 
   final List<Appointment> appointmentDetails;
 
@@ -33,15 +34,15 @@ class CustomAgenda extends StatelessWidget {
                     ),
                     title: Container(
                         child: Text(
-                          '${appointmentDetails[index].subject}',
-                        )),
+                      '${appointmentDetails[index].subject}',
+                    )),
                     subtitle: Text('Added by XY or Private Appointment'),
                   );
                 },
                 separatorBuilder: (BuildContext context, int index) =>
-                const Divider(
-                  height: 5,
-                ))),
+                    const Divider(
+                      height: 5,
+                    ))),
       ),
     );
   }
