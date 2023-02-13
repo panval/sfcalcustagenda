@@ -54,10 +54,11 @@ class ScheduleExample extends State<CustomAgenda> {
     );
   }
 
+//todo:  missing initial event showUp.
   void calendarTapped(CalendarTapDetails calendarTapDetails) {
     if (calendarTapDetails.targetElement == CalendarElement.calendarCell) {
       final result = calendarTapDetails.appointments!.cast<Appointment>();
-      log(result.first.toString());
+
       setState(() {
         appointmentDetails = result;
       });
